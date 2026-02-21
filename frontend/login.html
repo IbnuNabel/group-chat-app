@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login | Group Chat</title>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body class="theme-v3 page-login">
+  <div class="bg"></div>
+
+  <main class="auth-shell">
+    <section class="card auth-card">
+      <header class="auth-header">
+        <h1 class="auth-title">Login</h1>
+        <p class="auth-sub">Masuk untuk mengakses ruang group chat</p>
+      </header>
+
+      <form id="loginForm" class="form">
+        <label class="field">
+          <span class="label">Username</span>
+          <input id="username" name="username" class="input" type="text" autocomplete="username" required />
+        </label>
+
+        <label class="field">
+          <span class="label">Password</span>
+          <input id="password" name="password" class="input" type="password" autocomplete="current-password" required />
+        </label>
+
+        <label class="remember">
+          <input id="rememberMe" type="checkbox" />
+          <span>Ingat saya</span>
+        </label>
+
+        <div id="loginError" class="alert hidden" role="alert"></div>
+
+        <button id="btnLogin" class="btn btn-accent" type="submit">Masuk</button>
+
+        <p class="hint">Catatan: Gunakan akun yang sudah dibuat.</p>
+      </form>
+    </section>
+  </main>
+
+  <script src="./js/config.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/login.js"></script>
+</body>
+</html>
