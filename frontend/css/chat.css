@@ -306,3 +306,15 @@ body.chat-page{
 .chat-page .error:not(:empty){ display:block; }
 
 .hidden{ display:none; }
+
+.msg-me {
+    align-self: flex-end;
+    background: rgba(109, 94, 252, 0.2) !important;
+    border-color: var(--primary) !important;
+    margin-left: 20% !important; /* Dorong ke kanan */
+}
+
+.chat-body {
+    display: flex;
+    flex-direction: column; /* Wajib agar align-self berfungsi */
+}
