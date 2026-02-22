@@ -11,7 +11,7 @@
   const onlineCountEl = document.getElementById("onlineCount");
 
   const RAW_API = window.APP_CONFIG && window.APP_CONFIG.API_BASE_URL ? window.APP_CONFIG.API_BASE_URL : "";
-  const API = String(RAW_API).replace(/\/$/, ""); // rapihin biar gak double //
+  const API = String(RAW_API).replace(/\/$/, ""); 
 
   function showChatError(msg) {
     chatError.textContent = msg;
@@ -52,12 +52,11 @@
   }
 
   if (!window.Auth || typeof Auth.requireAuth !== "function") {
-    showChatError("auth.js belum tersedia. Pastikan file js/auth.js sudah dibuat (tugas Cath).");
+    showChatError("auth.js belum tersedia.");
     return;
   }
   Auth.requireAuth("login.html");
 
-  // Ambil user login
   let currentUser = null;
   try {
     currentUser = Auth.getUser ? Auth.getUser() : null;
@@ -66,35 +65,44 @@
   const username = currentUser && currentUser.username ? String(currentUser.username) : "-";
   whoamiEl.textContent = username;
 
-  // Sidebar anggota (statis untuk UI, bisa dikembangkan nanti)
-  const MEMBERS = ["catherine", "ibnu", "shafira", "shinta"];
+  // --- UBAH DI SINI ---
+  // Fungsi renderMembers sekarang mengambil data dari API, bukan variabel statis
+  async function fetchMembers() {
+    try {
+      const headers = Object.assign(
+        { "Content-Type": "application/json" },
+        Auth.buildAuthHeaders ? Auth.buildAuthHeaders() : {}
+      );
 
-  function renderMembers() {
-    const lower = String(username || "").toLowerCase();
-    let onlineCount = 0;
+      const res = await fetch(`${API}/api/auth/users`, { headers });
+      const data = await res.json();
 
-    const html = MEMBERS.map((name) => {
-      const isOnline = name === lower; // yang login dianggap online
-      if (isOnline) onlineCount++;
+      if (data.success) {
+        let onlineCount = 0;
+        const html = data.users.map((user) => {
+          const isOnline = user.status === "online";
+          if (isOnline) onlineCount++;
 
-      return `
-        <div class="member ${isOnline ? "member--online" : ""}">
-          <div class="member-left">
-            <span class="member-dot"></span>
-            <div>
-              <div class="member-name">${escapeHtml(name)}</div>
-              <div class="member-sub">${isOnline ? "online" : "last seen:"}</div>
+          return `
+            <div class="member ${isOnline ? "member--online" : ""}">
+              <div class="member-left">
+                <span class="member-dot"></span>
+                <div>
+                  <div class="member-name">${escapeHtml(user.username)}</div>
+                  <div class="member-sub">${isOnline ? "online" : "offline"}</div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      `;
-    }).join("");
+          `;
+        }).join("");
 
-    membersListEl.innerHTML = html;
-    onlineCountEl.textContent = String(onlineCount);
+        membersListEl.innerHTML = html;
+        onlineCountEl.textContent = String(onlineCount);
+      }
+    } catch (err) {
+      console.error("Gagal update daftar anggota", err);
+    }
   }
-
-  renderMembers();
 
   let lastRenderedHash = "";
   let isFetching = false;
@@ -122,7 +130,6 @@
       const msgs = Array.isArray(data.data) ? data.data : [];
       msgs.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
-      // Render hanya kalau berubah (biar tidak flicker)
       const hash = JSON.stringify(msgs.map((m) => [m.id, m.sender, m.text, m.timestamp]));
       if (hash !== lastRenderedHash) {
         lastRenderedHash = hash;
@@ -130,23 +137,29 @@
       }
     } catch {
       setNet(false);
-      showChatError("Gagal mengambil pesan. Periksa koneksi atau pastikan backend berjalan.");
+      showChatError("Gagal mengambil pesan.");
     } finally {
       isFetching = false;
     }
   }
 
+  // --- UBAH DI SINI ---
+  // Menambahkan class 'msg-me' jika pengirimnya adalah user yang sedang login
   function renderMessages(msgs) {
     const html = msgs
       .map((m) => {
         const sender = escapeHtml(m.sender ?? "Anonymous");
         const time = escapeHtml(formatTime(m.timestamp));
         const text = escapeHtml(m.text ?? "");
+        
+        // Logika untuk menentukan apakah ini pesan saya atau orang lain
+        const isMe = sender.toLowerCase() === username.toLowerCase();
+        const bubbleClass = isMe ? "msg msg-me" : "msg";
 
         return `
-          <article class="msg">
+          <article class="${bubbleClass}">
             <div class="msg-head">
-              <div class="msg-sender">${sender}</div>
+              <div class="msg-sender">${isMe ? "Anda" : sender}</div>
               <div class="msg-time">${time}</div>
             </div>
             <div class="msg-text">${text}</div>
@@ -186,7 +199,7 @@
       inputEl.value = "";
       await fetchMessages();
     } catch {
-      showChatError("Gagal mengirim pesan. Periksa koneksi atau autentikasi.");
+      showChatError("Gagal mengirim pesan.");
     } finally {
       btnSend.disabled = false;
       inputEl.focus();
@@ -200,8 +213,6 @@
 
   btnLogout.addEventListener("click", async () => {
     btnLogout.disabled = true;
-    clearChatError();
-
     try {
       const headers = Object.assign(
         { "Content-Type": "application/json" },
@@ -214,7 +225,13 @@
     }
   });
 
-  // Polling 2 detik
+  // --- UBAH DI SINI ---
+  // Menjalankan fetch pesan dan fetch anggota secara berkala
   fetchMessages();
-  setInterval(fetchMessages, 2000);
+  fetchMembers(); // Ambil daftar anggota saat pertama kali load
+  
+  setInterval(() => {
+    fetchMessages();
+    fetchMembers(); // Update status online/offline tiap 2 detik
+  }, 2000);
 })();
