@@ -65,8 +65,6 @@
   const username = currentUser && currentUser.username ? String(currentUser.username) : "-";
   whoamiEl.textContent = username;
 
-  // --- UBAH DI SINI ---
-  // Fungsi renderMembers sekarang mengambil data dari API, bukan variabel statis
   async function fetchMembers() {
   try {
     const headers = Object.assign(
@@ -142,16 +140,13 @@
     }
   }
 
-  // --- UBAH DI SINI ---
-  // Menambahkan class 'msg-me' jika pengirimnya adalah user yang sedang login
   function renderMessages(msgs) {
     const html = msgs
       .map((m) => {
         const sender = escapeHtml(m.sender ?? "Anonymous");
         const time = escapeHtml(formatTime(m.timestamp));
         const text = escapeHtml(m.text ?? "");
-        
-        // Logika untuk menentukan apakah ini pesan saya atau orang lain
+
         const isMe = sender.toLowerCase() === username.toLowerCase();
         const bubbleClass = isMe ? "msg msg-me" : "msg";
 
@@ -223,12 +218,8 @@
       window.location.href = "login.html";
     }
   });
-
-  // --- UBAH DI SINI ---
-  // Menjalankan fetch pesan dan fetch anggota secara berkala
   fetchMessages();
-  fetchMembers(); // Ambil daftar anggota saat pertama kali load
-  
+  fetchMembers();
   setInterval(() => {
     fetchMessages();
     fetchMembers(); // Update status online/offline tiap 2 detik
