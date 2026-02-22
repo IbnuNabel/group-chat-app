@@ -56,7 +56,6 @@ window.Auth = (function () {
     }
   }
 
-  // Redirect otomatis \
   (function checkAccess() {
     const token = getToken();
     const path = window.location.pathname;
