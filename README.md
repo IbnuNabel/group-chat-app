@@ -43,7 +43,7 @@ Proyek ini adalah aplikasi *Group Chat* sederhana yang mendemonstrasikan pemisah
 └── /docs                    # Dokumentasi & Laporan Akhir
 
 ```
-
+---
 ## 🚀 𝐂𝐚𝐫𝐚 𝐌𝐞𝐧𝐣𝐚𝐥𝐚𝐧𝐤𝐚𝐧 𝐀𝐩𝐥𝐢𝐤𝐚𝐬𝐢
 
 Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi di komputer lokal Anda:
