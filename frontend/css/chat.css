@@ -12,7 +12,6 @@
   --danger: rgba(239, 68, 68, 0.16);
   --dangerStroke: rgba(239, 68, 68, 0.35);
 
-  /* biar netDot gak error */
   --online: #22c55e;
   --offline:#64748b;
 }
@@ -38,14 +37,13 @@ body.chat-page{
     linear-gradient(120deg, rgba(11, 7, 26, 1), rgba(4, 24, 27, 1));
 }
 
-/* wrapper */
+
 .chat-page .shell{
   width: min(1100px, 100%);
   margin: 0 auto;
   padding: 26px 18px;
 }
 
-/* TOPBAR */
 .chat-page .topbar{
   display:flex;
   align-items:flex-start;
@@ -129,7 +127,6 @@ body.chat-page{
   min-width: 110px;
 }
 
-/* card */
 .chat-page .card{
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.60), rgba(15, 23, 42, 0.35));
   border: 1px solid var(--stroke);
@@ -200,7 +197,6 @@ body.chat-page{
 
 .chat-page .input::placeholder{ color: rgba(255,255,255,0.40); }
 
-/* message bubble */
 .chat-page .msg{
   display:flex;
   flex-direction:column;
@@ -311,10 +307,10 @@ body.chat-page{
     align-self: flex-end;
     background: rgba(109, 94, 252, 0.2) !important;
     border-color: var(--primary) !important;
-    margin-left: 20% !important; /* Dorong ke kanan */
+    margin-left: 20% !important;
 }
 
 .chat-body {
     display: flex;
-    flex-direction: column; /* Wajib agar align-self berfungsi */
+    flex-direction: column; 
 }
