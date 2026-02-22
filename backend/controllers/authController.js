@@ -17,9 +17,6 @@ const login = (req, res) => {
     
   user.status = "online"; 
 
-  const token = jwt.sign({ username: user.username }, jwtSecret, { expiresIn: jwtExpires });
-  }
-
   const token = jwt.sign({ username: user.username }, jwtSecret, {
     expiresIn: jwtExpires,
   });
