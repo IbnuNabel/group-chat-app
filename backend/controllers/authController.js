@@ -14,6 +14,7 @@ const login = (req, res) => {
       success: false,
       message: "Username atau password salah!",
     });
+  }
     
   user.status = "online"; 
 
