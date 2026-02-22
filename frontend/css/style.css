@@ -110,7 +110,6 @@ body{
   background: var(--offline);
 }
 
-/* TOPBAR */
 .topbar{
   width: min(1200px, 92vw);
   margin: 22px auto 12px;
@@ -141,7 +140,6 @@ body{
   margin-top: 6px;
 }
 
-/* LAYOUT CHAT */
 .chat-layout{
   display: grid;
   grid-template-columns: 1fr 360px;
@@ -221,7 +219,6 @@ body{
 
 .hidden{ display:none; }
 
-/* SIDEBAR */
 .chat-right{
   padding: 16px;
   display:flex;
@@ -284,7 +281,6 @@ body{
 .member--online .member-dot{ background: var(--online); }
 .member--online .member-sub{ color: rgba(34,197,94,.92); }
 
-/* LOGIN */
 .page-login .auth-shell{
   min-height: 100vh;
   display:flex;
@@ -358,4 +354,5 @@ body{
     justify-content:flex-start;
     margin-top: 0;
   }
+
 }
