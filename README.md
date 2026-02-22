@@ -41,3 +41,31 @@ Proyek ini adalah aplikasi *Group Chat* sederhana yang mendemonstrasikan pemisah
 │   └── chat.html            # Halaman Ruang Obrolan (Group Chat)
 │
 └── /docs                    # Dokumentasi & Laporan Akhir
+
+---
+
+## 🚀 𝐂𝐚𝐫𝐚 𝐌𝐞𝐧𝐣𝐚𝐥𝐚𝐧𝐤𝐚𝐧 𝐀𝐩𝐥𝐢𝐤𝐚𝐬𝐢
+
+Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi di komputer lokal Anda:
+
+### 𝟏. 𝐏𝐞𝐫𝐬𝐢𝐚𝐩𝐚𝐧 𝐀𝐰𝐚𝐥
+Pastikan Anda sudah menginstal [Node.js](https://nodejs.org/) di komputer Anda.
+
+### 𝟐. 𝐂𝐥𝐨𝐧𝐞 𝐑𝐞𝐩𝐨𝐬𝐢𝐭𝐨𝐫𝐢
+```bash
+git clone [https://github.com/IbnuNabel/group-chat-app.git](https://github.com/IbnuNabel/group-chat-app.git)
+cd group-chat-app
+
+### 𝟑. 𝐒𝐞𝐭𝐮𝐩 𝐁𝐚𝐜𝐤𝐞𝐧𝐝
+```bash
+1. Masuk ke folder backend: cd backend
+2. Instal dependencies: npm install
+3. Buat file .env di dalam folder backend dan tambahkan:
+   PORT=5000
+   JWT_SECRET=rahasia_kelompok_kita_123
+4. Jalankan server: node server.js
+
+### 𝟒. 𝐒𝐞𝐭𝐮𝐩 𝐅𝐫𝐨𝐧𝐭𝐞𝐧𝐝
+1. Buka terminal baru (tetap biarkan terminal backend berjalan).
+2. Masuk ke folder frontend: cd frontend
+3. Buka file index.html langsung di browser, atau gunakan extension Live Server di VS Code untuk pengalaman yang lebih baik.
