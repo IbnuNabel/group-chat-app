@@ -24,7 +24,7 @@ Proyek ini adalah aplikasi *Group Chat* sederhana yang mendemonstrasikan pemisah
 ---
 
 ## 📂 Struktur Repositori Terkait
-```text
+```
 /group-chat-app
 ├── /backend                 # Server API (Node.js/Express)
 │   ├── /config              # Konfigurasi DB dummy & Auth
@@ -42,7 +42,7 @@ Proyek ini adalah aplikasi *Group Chat* sederhana yang mendemonstrasikan pemisah
 │
 └── /docs                    # Dokumentasi & Laporan Akhir
 
----
+```
 
 ## 🚀 𝐂𝐚𝐫𝐚 𝐌𝐞𝐧𝐣𝐚𝐥𝐚𝐧𝐤𝐚𝐧 𝐀𝐩𝐥𝐢𝐤𝐚𝐬𝐢
 
@@ -53,9 +53,10 @@ Pastikan Anda sudah menginstal [Node.js](https://nodejs.org/) di komputer Anda.
 
 ### 𝟐. 𝐂𝐥𝐨𝐧𝐞 𝐑𝐞𝐩𝐨𝐬𝐢𝐭𝐨𝐫𝐢
 ```bash
-git clone [https://github.com/IbnuNabel/group-chat-app.git](https://github.com/IbnuNabel/group-chat-app.git)
-cd group-chat-app
+git clone https://github.com/IbnuNabel/group-chat-app.git
 
+cd group-chat-app
+```
 ### 𝟑. 𝐒𝐞𝐭𝐮𝐩 𝐁𝐚𝐜𝐤𝐞𝐧𝐝
 ```bash
 1. Masuk ke folder backend: cd backend
@@ -64,7 +65,7 @@ cd group-chat-app
    PORT=5000
    JWT_SECRET=rahasia_kelompok_kita_123
 4. Jalankan server: node server.js
-
+```
 ### 𝟒. 𝐒𝐞𝐭𝐮𝐩 𝐅𝐫𝐨𝐧𝐭𝐞𝐧𝐝
 1. Buka terminal baru (tetap biarkan terminal backend berjalan).
 2. Masuk ke folder frontend: cd frontend
