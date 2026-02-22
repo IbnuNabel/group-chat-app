@@ -1,5 +1,3 @@
-// shinta
-
 require("dotenv").config();
 
 module.exports = {
