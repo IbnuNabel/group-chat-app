@@ -35,8 +35,6 @@ window.Auth = (function () {
     if (user) {
       storage.setItem(USER_KEY, JSON.stringify(user));
     }
-
-    window.location.href = "chat.html";
   }
 
   function clearSession() {
@@ -44,8 +42,6 @@ window.Auth = (function () {
     localStorage.removeItem(USER_KEY);
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.removeItem(USER_KEY);
-
-    window.location.href = "login.html";
   }
 
   function buildAuthHeaders() {
@@ -53,7 +49,15 @@ window.Auth = (function () {
     return token ? { Authorization: `Bearer ${token}` } : {};
   }
 
-  function checkAccess() {
+  function requireAuth(redirectTo) {
+    const token = getToken();
+    if (!token) {
+      window.location.replace(redirectTo || "login.html");
+    }
+  }
+
+  // Redirect otomatis \
+  (function checkAccess() {
     const token = getToken();
     const path = window.location.pathname;
     const page = path.substring(path.lastIndexOf("/") + 1);
@@ -65,9 +69,7 @@ window.Auth = (function () {
     if (page === "login.html" && token) {
       window.location.replace("chat.html");
     }
-  }
-
-  checkAccess();
+  })();
 
   return {
     getToken,
@@ -75,6 +77,6 @@ window.Auth = (function () {
     setSession,
     clearSession,
     buildAuthHeaders,
+    requireAuth,
   };
 })();
-
