@@ -7,8 +7,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.post('/login', authController.login);
 
 // Jalur: POST /api/auth/logout
-router.post('/logout', authController.logout);
-
-router.get('/users', authMiddleware, authController.getUsers);
+router.post('/logout', authMiddleware, authController.logout);
 
 module.exports = router;
