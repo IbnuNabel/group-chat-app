@@ -42,4 +42,11 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { login, logout };
+const getUsers = (req, res) => {
+  res.status(200).json({
+    success: true,
+    users: db.users.map(u => ({ username: u.username, status: u.status }))
+  });
+};
+
+module.exports = { login, logout, getUsers };
