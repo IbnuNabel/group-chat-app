@@ -68,39 +68,41 @@
   // --- UBAH DI SINI ---
   // Fungsi renderMembers sekarang mengambil data dari API, bukan variabel statis
   async function fetchMembers() {
-    try {
-      const headers = Object.assign(
-        { "Content-Type": "application/json" },
-        Auth.buildAuthHeaders ? Auth.buildAuthHeaders() : {}
-      );
+  try {
+    const headers = Object.assign(
+      { "Content-Type": "application/json" },
+      Auth.buildAuthHeaders ? Auth.buildAuthHeaders() : {}
+    );
 
-      const res = await fetch(`${API}/api/auth/users`, { headers });
-      const data = await res.json();
+    const res = await fetch(`${API}/api/auth/users`, { headers });
+    const data = await res.json();
 
-      if (data.success) {
-        let onlineCount = 0;
-        const html = data.users.map((user) => {
-          const isOnline = user.status === "online";
-          if (isOnline) onlineCount++;
-          
-          return `
-            <div class="member ${isOnline ? "member--online" : ""}">
-              <div class="member-left">
-                <div class="member-dot"></div> <div>
-                  <div class="member-name">${escapeHtml(user.username)}</div>
-                  <div class="member-sub">${isOnline ? "online" : "offline"}</div>
-                </div>
+    if (data.success) {
+      let onlineCount = 0;
+      const html = data.users.map((user) => {
+        const isOnline = user.status === "online";
+        if (isOnline) onlineCount++;
+        
+        // PASTIKAN STRUKTURNYA SEPERTI INI:
+        return `
+          <div class="member ${isOnline ? "member--online" : ""}">
+            <div class="member-left">
+              <div class="member-dot"></div>
+              <div>
+                <div class="member-name">${escapeHtml(user.username)}</div>
+                <div class="member-sub">${isOnline ? "online" : "offline"}</div>
               </div>
             </div>
-          `;
-        }).join("");
+          </div>
+        `;
+      }).join("");
 
-        membersListEl.innerHTML = html;
-        onlineCountEl.textContent = String(onlineCount);
-      }
-    } catch (err) {
-      console.error("Gagal update daftar anggota", err);
+      membersListEl.innerHTML = html;
+      onlineCountEl.textContent = String(onlineCount);
     }
+  } catch (err) {
+    console.error("Gagal update daftar anggota", err);
+    }  
   }
 
   let lastRenderedHash = "";
