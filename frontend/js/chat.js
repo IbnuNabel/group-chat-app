@@ -82,12 +82,11 @@
         const html = data.users.map((user) => {
           const isOnline = user.status === "online";
           if (isOnline) onlineCount++;
-
+          
           return `
             <div class="member ${isOnline ? "member--online" : ""}">
               <div class="member-left">
-                <span class="member-dot"></span>
-                <div>
+                <div class="member-dot"></div> <div>
                   <div class="member-name">${escapeHtml(user.username)}</div>
                   <div class="member-sub">${isOnline ? "online" : "offline"}</div>
                 </div>
