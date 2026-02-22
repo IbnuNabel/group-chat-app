@@ -83,19 +83,17 @@
         const isOnline = user.status === "online";
         if (isOnline) onlineCount++;
         
-        // PASTIKAN STRUKTURNYA SEPERTI INI:
         return `
           <div class="member ${isOnline ? "member--online" : ""}">
             <div class="member-left">
-              <div class="member-dot"></div>
-              <div>
+              <div class="member-dot"></div> <div>
                 <div class="member-name">${escapeHtml(user.username)}</div>
                 <div class="member-sub">${isOnline ? "online" : "offline"}</div>
               </div>
             </div>
           </div>
         `;
-      }).join("");
+    }).join("");
 
       membersListEl.innerHTML = html;
       onlineCountEl.textContent = String(onlineCount);
