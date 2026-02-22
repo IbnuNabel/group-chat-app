@@ -15,7 +15,6 @@
     errBox.classList.add("hidden");
   }
 
-  // Jika sudah punya token, langsung ke chat
   try {
     if (window.Auth && typeof Auth.getToken === "function" && Auth.getToken()) {
       window.location.href = "chat.html";
@@ -73,4 +72,5 @@
       btn.textContent = "Masuk";
     }
   });
+
 })();
